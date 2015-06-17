@@ -24,6 +24,7 @@ package org.jboss.teiid.connectors.translator.jdbc.pi;
 
 import static org.teiid.translator.TypeFacility.RUNTIME_NAMES.FLOAT;
 import static org.teiid.translator.TypeFacility.RUNTIME_NAMES.INTEGER;
+import static org.teiid.translator.TypeFacility.RUNTIME_NAMES.OBJECT;
 import static org.teiid.translator.TypeFacility.RUNTIME_NAMES.STRING;
 
 import java.util.ArrayList;
@@ -98,6 +99,9 @@ public class PIExecutionFactory extends JDBCExecutionFactory {
         addPushDownFunction(PI, "ParentName", STRING, STRING, INTEGER); //$NON-NLS-1$
         addPushDownFunction(PI, "List", STRING, STRING)
             .setVarArgs(true); //$NON-NLS-1$
+        addPushDownFunction(PI, "DIGCODE", INTEGER, STRING, STRING); //$NON-NLS-1$
+        addPushDownFunction(PI, "DIGSTRING", STRING, INTEGER); //$NON-NLS-1$
+        addPushDownFunction(PI, "PE", STRING, OBJECT); //$NON-NLS-1$
         
     }
 
@@ -113,7 +117,7 @@ public class PIExecutionFactory extends JDBCExecutionFactory {
     
     @Override
     public boolean supportsRowLimit() {
-        return false;
+        return true;
     }
     
     @Override
@@ -190,7 +194,7 @@ public class PIExecutionFactory extends JDBCExecutionFactory {
         supportedFunctions.add(SourceSystemFunctions.TAN);
         supportedFunctions.add(SourceSystemFunctions.TRIM);
         supportedFunctions.add(SourceSystemFunctions.UCASE);
-        supportedFunctions.add(SourceSystemFunctions.YEAR);
+        supportedFunctions.add(SourceSystemFunctions.YEAR);        
         return supportedFunctions;
     }
 }
