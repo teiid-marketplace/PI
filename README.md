@@ -4,7 +4,7 @@ A Teiid translator Osisoft's PI Database using JDBC Driver.
 To build use maven > 3.0 version and Java 1.7 later and execute
 
 ```
-git clone ..
+git clone https://github.com/teiid-marketplace/pi.git
 cd pi/translator-pi
 mvn clean install -s settings.xml
 ```
@@ -17,4 +17,13 @@ mvn clean install -s settings.xml
 ```
 - save restart the server.
 
-- Now in your VDB, use "osisoft-pi" as the translator name and issue queries.
+- Now in your VDB, use "osisoft-pi" as the translator name and issue queries. For example, in Dynamic VDB
+
+pi-vdb.xml
+```
+<vdb name="pidb" version="1">
+    <model visible="true" name="accounts">
+        <source name="development" translator-name="osisoft-pi"/> 
+    </model>    
+</vdb>
+```
